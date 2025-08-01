@@ -1,10 +1,11 @@
 // db.js - Connect Node.js server to MongoDB using mongoose
 
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Replace with your MongoDB URL (best to store in .env file)
-const mongoURL = "mongodb+srv://ashutosh91619:ashu123@cluster0.dw3k4jx.mongodb.net/hotels?retryWrites=true&w=majority";
-
+const mongoURL=process.env.MONGODB_URL
+// const mongoURL =process.env.MONGODB_URL_LOCA
 // Connect to MongoDB
 mongoose.connect(mongoURL, {
   useNewUrlParser: true,
