@@ -1,26 +1,33 @@
-// This db.js file is esential for maintaing the connection from node js server to your mongodb server through the library using mongoose library 
- const mongoose=require('mongoose');
- const mongoURL="mongodb://localhost:27017/hotels"  // replace databse name to the hotel
+// db.js - Connect Node.js server to MongoDB using mongoose
 
- mongoose.connect(mongoURL ,{
-  useNewUrlParser:true,
- useUnifiedTopology:true,
+const mongoose = require('mongoose');
 
+// Replace with your MongoDB URL (best to store in .env file)
+const mongoURL = "mongodb+srv://ashutosh91619:ashu123@cluster0.dw3k4jx.mongodb.net/hotels?retryWrites=true&w=majority";
 
- })
+// Connect to MongoDB
+mongoose.connect(mongoURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
- const db = mongoose.connection;
- db.on('connected',() =>{
-  console.log('connected to mongodb server')
- })
-  db.on('error',(err) =>{
-  console.log('error to connected  to mongodb server')
- })
-  db.on('disconnected',() =>{
-  console.log('disconnected to mongodb server')
- })
-  db.on('reconnected',() =>{
-  console.log('reconnected to mongodb server')
- })
+// Connection Events
+const db = mongoose.connection;
 
-module.exports=db;
+db.on('connected', () => {
+  console.log('✅ Connected to MongoDB server');
+});
+
+db.on('error', (err) => {
+  console.error('❌ Error connecting to MongoDB:', err);
+});
+
+db.on('disconnected', () => {
+  console.log('⚠️ Disconnected from MongoDB');
+});
+
+db.on('reconnected', () => {
+  console.log('🔄 Reconnected to MongoDB');
+});
+
+module.exports = db;
